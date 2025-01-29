@@ -3,7 +3,7 @@ macos-titlebar-style = hidden
 theme = catppuccin-mocha
 
 font-family = MesloLGS NF
-font-size = 19
+font-size = 17
 
 background-blur-radius = 20
 

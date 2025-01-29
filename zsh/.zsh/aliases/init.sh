@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-[[ $(type eza) ]] || source eza.sh
+[[ ! $(type eza) ]] || source $HOME/.zsh/aliases/eza.sh
