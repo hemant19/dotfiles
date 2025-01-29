@@ -9,11 +9,7 @@ export EDITOR=nvim
 
 autoload -U compinit; compinit
 
-## Load Plugins
-
-source $HOME/.zsh/plugins/p10k/powerlevel10k.zsh-theme
-source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/plugins/init.sh
+source $HOME/.zsh/aliases/init.sh
 
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
