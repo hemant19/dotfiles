@@ -11,7 +11,7 @@ autoload -U compinit; compinit
 
 source $HOME/.zsh/plugins/init.sh
 source $HOME/.zsh/aliases/init.sh
-
+source $HOME/.zsh/options.sh
 
 if [[ $(uname) == "Darwin" ]]; then
   source $HOME/.zsh/macos.sh
