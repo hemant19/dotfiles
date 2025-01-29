@@ -12,4 +12,10 @@ autoload -U compinit; compinit
 source $HOME/.zsh/plugins/init.sh
 source $HOME/.zsh/aliases/init.sh
 
+
+if [[ $(uname) == "Darwin" ]]; then
+  source $HOME/.zsh/macos.sh
+fi
+
+
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
