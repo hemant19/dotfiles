@@ -1,1 +1,3 @@
 **/**/.DS_Store
+zsh/.zsh/plugins/*
+!zsh/.zsh/plugins/init.sh
