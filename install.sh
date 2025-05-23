@@ -3,6 +3,10 @@
 #### Install all apps from Brew 
 brew bundle install
 
+
+#### Install sdkman 
+curl -s "https://get.sdkman.io" | bash
+
 #### Install and init config
 mac_config=(nvim zsh ghostty aerospace)
 
