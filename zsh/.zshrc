@@ -9,17 +9,17 @@ export EDITOR=nvim
 
 autoload -U compinit; compinit
 
-source $HOME/.zsh/plugins/init.sh
-source $HOME/.zsh/aliases/init.sh
-source $HOME/.zsh/options.sh
-
 if [[ $(uname) == "Darwin" ]]; then
   source $HOME/.zsh/macos.sh
 fi
 
+source $HOME/.zsh/plugins/init.sh
+source $HOME/.zsh/aliases/init.sh
+source $HOME/.zsh/options.sh
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
