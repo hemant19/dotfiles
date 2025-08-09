@@ -23,3 +23,18 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# TMUX auto-connect
+if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ "$TERM" != "dumb" ]; then
+    # Get the list of sessions
+    sessions=$(tmux list-sessions -F "#S" 2>/dev/null)
+    if [ -z "$sessions" ]; then
+        # No sessions, create a new one
+        tmux new-session -s "main"
+    else
+        # Attach to the last session
+        last_session=$(echo "$sessions" | tail -n 1)
+        tmux attach-session -t "$last_session"
+    fi
+fi
+
+
