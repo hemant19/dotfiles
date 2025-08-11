@@ -3,6 +3,9 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.window_decorations = "RESIZE"
+config.window_padding = {
+	bottom = 0,
+}
 config.enable_tab_bar = false
 
 config.font = wezterm.font("JetBrainsMono NF")
