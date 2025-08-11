@@ -17,25 +17,10 @@ fi
 source $HOME/.zsh/plugins/init.sh
 source $HOME/.zsh/aliases/init.sh
 source $HOME/.zsh/options.sh
+source $HOME/.zsh/functions.sh
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# TMUX auto-connect
-# Check if tmux is installed, not already in a tmux session, and the shell is interactive
-function tm() {
-  if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [[ $- == *i* ]]; then
-      # Get the list of sessions
-      sessions=$(tmux list-sessions -F "#S" 2>/dev/null)
-      if [ -z "$sessions" ]; then
-          # No sessions, create a new one called "main"
-          tmux new-session -s "main"
-      else
-          # Attach to the last session in the list
-          last_session=$(echo "$sessions" | tail -n 1)
-          tmux attach-session -t "$last_session"
-      fi
-  fi
-}
