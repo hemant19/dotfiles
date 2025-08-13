@@ -15,7 +15,7 @@ function tm() {
   fi
 }
 
-function tmux-sessionizer() {
+function ts() {
   if [[ $# -eq 1 ]]; then
     selected=$1
   else

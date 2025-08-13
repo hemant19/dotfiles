@@ -6,7 +6,6 @@ fi
 
 export LANG=en_US.UTF-8
 export EDITOR=nvim
-export TERM="xterm-256color"
 
 autoload -U compinit; compinit
 
@@ -15,7 +14,7 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 source $HOME/.zsh/plugins/init.sh
-source $HOME/.zsh/aliases/init.sh
+source $HOME/.zsh/aliases.sh
 source $HOME/.zsh/options.sh
 source $HOME/.zsh/functions.sh
 
