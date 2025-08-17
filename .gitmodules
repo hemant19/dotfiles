@@ -3,13 +3,16 @@
   url = https://github.com/romkatv/powerlevel10k.git
 [submodule "zsh/.zsh/plugins/fzf-tab"]
 	path = zsh/.zsh/plugins/fzf-tab
-  url = https://github.com/Aloxaf/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
 [submodule "zsh/.zsh/plugins/zsh-autosuggestions"]
 	path = zsh/.zsh/plugins/zsh-autosuggestions
-  url = https://github.com/zsh-users/zsh-autosuggestions.git
+	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "zsh/.zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/.zsh/plugins/zsh-syntax-highlighting
-  url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "zsh/.zsh/plugins/powerlevel10k"]
+	path = zsh/.zsh/plugins/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
