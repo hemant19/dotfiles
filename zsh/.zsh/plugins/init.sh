@@ -6,7 +6,7 @@ source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-source <(fzf --zsh)
-eval "$(zoxide init zsh)"
+[[ -x "$(command -v fzf &>/dev/null)"]] source <(fzf --zsh)
+[[ -x "$(command -v zoxide &>/dev/null)"]] eval "$(zoxide init zsh)"
 
 
