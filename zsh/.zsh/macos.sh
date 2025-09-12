@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-eval $(/opt/homebrew/bin/brew shellenv)
+[[ -s "/opt/homebrew/bin/brew" ]] && eval $(/opt/homebrew/bin/brew shellenv)
