@@ -8,7 +8,7 @@ config.window_padding = {
 }
 config.enable_tab_bar = false
 
-config.font = wezterm.font("JetBrainsMono NF")
+config.font = wezterm.font("MesloLGS NF")
 config.font_size = 16
 config.color_scheme = "Catppuccin Mocha"
 config.keys = {
