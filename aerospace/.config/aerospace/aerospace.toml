@@ -56,6 +56,33 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 9 = '^Built-in Retina Display$'
 8 = '^Built-in Retina Display$'
 7 = '^Built-in Retina Display$'
+6 = '^P24h-10$'
+5 = '^P24h-10$'
+4 = '^P24h-10$'
+
+[[on-window-detected]]
+  if.app-id = 'com.github.wez.wezterm'
+  run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+  if.app-id = 'com.google.Chrome'
+  if.window-title-regex-substring = 'Google Chrome – Hemant'
+  run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+  if.app-id = 'com.google.Chrome'
+  if.window-title-regex-substring = 'Google Chrome – pracheta'
+  run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+  if.app-id = 'com.google.Chrome'
+  if.window-title-regex-substring = 'Google Chrome – Yogeshwar'
+  run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+  if.app-id = 'com.google.Chrome'
+  if.window-title-regex-substring = 'Google Chrome – Nita'
+  run = ['move-node-to-workspace 6']
 
 [gaps]
 inner.horizontal = 0

@@ -11,5 +11,10 @@ config.enable_tab_bar = false
 config.font = wezterm.font("JetBrainsMono NF")
 config.font_size = 16
 config.color_scheme = "Catppuccin Mocha"
-
+config.keys = {
+	-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
+	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
+	-- Make Option-Right equivalent to Alt-f; forward-word
+	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
+}
 return config
