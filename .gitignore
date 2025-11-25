@@ -1,3 +1,5 @@
 **/**/.DS_Store
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm/
+
+nvim/.config/nvim/lazy-lock.json
