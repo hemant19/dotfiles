@@ -7,6 +7,7 @@ setopt no_beep
 setopt auto_cd
 
 # history
+export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 setopt append_history
