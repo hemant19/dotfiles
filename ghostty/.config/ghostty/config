@@ -1,14 +1,12 @@
-macos-titlebar-style = hidden
+theme = Catppuccin Mocha
 
-theme = catppuccin-mocha
-
-font-family = Hack NF 
+font-family = MesloLGS NF
 font-size = 15
 
 background-blur-radius = 20
 
 mouse-hide-while-typing = true
-window-decoration = true
+window-decoration = false
 
 macos-option-as-alt = true
 keybind = shift+enter=text:\n

@@ -9,10 +9,6 @@ export EDITOR=nvim
 
 autoload -U compinit; compinit
 
-if [[ $(uname) == "Darwin" ]]; then
-  source $HOME/.zsh/macos.sh
-fi
-
 source $HOME/.zsh/plugins/init.sh
 source $HOME/.zsh/aliases.sh
 source $HOME/.zsh/options.sh
@@ -20,6 +16,10 @@ source $HOME/.zsh/functions.sh
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.docker/bin/docker" ]] && export PATH="$HOME/.docker/bin":$PATH
+export PATH="/Users/hemant/.antigravity/antigravity/bin:$PATH"
 
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
+. "$HOME/.local/bin/env"
