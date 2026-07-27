@@ -1,21 +1,22 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
-# It's not necessary to copy all keys to your config.
-# If the key is missing in your config, "default-config.toml" will serve as a fallback
-
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = []
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = ['workspace 1']
 
 # Start AeroSpace at login
 start-at-login = true
+
+# Automatically reload the config when the config file is saved
+# After setting this to true, reload once manually to start the auto-reloading
+auto-reload-config = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -24,7 +25,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 0
+accordion-padding = 30
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -42,7 +43,7 @@ key-mapping.preset = 'qwerty'
 # Drop it from your config, if you don't like this behavior
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -52,37 +53,13 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-0 = '^Built-in Retina Display$'
-9 = '^Built-in Retina Display$'
-8 = '^Built-in Retina Display$'
-7 = '^Built-in Retina Display$'
-6 = '^P24h-10$'
-5 = '^P24h-10$'
-4 = '^P24h-10$'
-
-[[on-window-detected]]
-  if.app-id = 'com.github.wez.wezterm'
-  run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-  if.app-id = 'com.google.Chrome'
-  if.window-title-regex-substring = 'Google Chrome – Hemant'
-  run = ['move-node-to-workspace 3']
-
-[[on-window-detected]]
-  if.app-id = 'com.google.Chrome'
-  if.window-title-regex-substring = 'Google Chrome – pracheta'
-  run = ['move-node-to-workspace 4']
-
-[[on-window-detected]]
-  if.app-id = 'com.google.Chrome'
-  if.window-title-regex-substring = 'Google Chrome – Yogeshwar'
-  run = ['move-node-to-workspace 5']
-
-[[on-window-detected]]
-  if.app-id = 'com.google.Chrome'
-  if.window-title-regex-substring = 'Google Chrome – Nita'
-  run = ['move-node-to-workspace 6']
+4 = ['^LG ULTRAFINE$', 'main']
+5 = ['^LG ULTRAFINE$', 'main']
+6 = ['^LG ULTRAFINE$', 'main']
+7 = ['^Built-in Retina Display$', 'main']
+8 = ['^Built-in Retina Display$', 'main']
+9 = ['^Built-in Retina Display$', 'main']
+0 = ['^Built-in Retina Display$', 'main']
 
 [gaps]
 inner.horizontal = 0
@@ -186,3 +163,7 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.bitgapp.eqmac' # Replace with your app's bundle ID
+run = 'layout floating'
