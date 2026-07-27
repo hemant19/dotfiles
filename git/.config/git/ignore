@@ -1,0 +1,23 @@
+# Global gitignore -- applies to every repo on this machine.
+
+# Claude Code
+**/.claude/settings.local.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+.idea/
+*.swp
+*.swo
+*~
+.vscode/
+.nvim.lua
+
+# Environment / secrets
+.env
+.env.local
+.direnv/

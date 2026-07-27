@@ -1,0 +1,78 @@
+[user]
+	name = Hemant Bhoyar
+	email = hybhoyar@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	pager = delta
+	excludesfile = ~/.config/git/ignore
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	syntax-theme = Catppuccin Mocha
+
+[pull]
+	# Refuse to silently merge or rebase when the branch has diverged; make it
+	# an explicit choice instead.
+	ff = only
+
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+
+[fetch]
+	prune = true
+	prunetags = true
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	mnemonicPrefix = true
+	renames = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[rebase]
+	autosquash = true
+	autostash = true
+	updateRefs = true
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[help]
+	autocorrect = prompt
+
+[alias]
+	s = status --short --branch
+	co = checkout
+	sw = switch
+	br = branch
+	ci = commit
+	cm = commit -m
+	amend = commit --amend --no-edit
+	unstage = restore --staged
+	last = log -1 HEAD --stat
+	lg = log --oneline --graph --decorate -20
+	lga = log --oneline --graph --decorate --all -30
+	d = diff
+	ds = diff --staged
+	wip = commit -am "wip" --no-verify
+	undo = reset --soft HEAD~1
+	pushf = push --force-with-lease
