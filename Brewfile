@@ -1,28 +1,55 @@
+# Regenerate a raw snapshot with:  brew bundle dump --force
+# Keep this file curated -- it is the source of truth for a fresh machine.
+
 tap "nikitabobko/tap"
-brew "bat"
+
+# --- Core CLI ---------------------------------------------------------------
+brew "git"
+brew "git-delta"   # pager configured in git/.gitconfig
+brew "lazygit"
+brew "neovim"
+brew "stow"
+brew "tmux"
+
+# --- Shell / navigation -----------------------------------------------------
+brew "bat"         # used by the fzf preview window (see zsh/.zsh/options.sh)
 brew "eza"
 brew "fd"
 brew "fzf"
-brew "git"
-brew "neovim"
-brew "node"
 brew "ripgrep"
-brew "stow"
-brew "tmux"
+brew "tree"
 brew "zoxide"
+
+# --- Languages / runtimes ---------------------------------------------------
+brew "node"
+brew "pnpm"
+brew "luarocks"        # neovim plugin builds
+brew "tree-sitter-cli" # neovim treesitter
+brew "pipx"
+brew "virtualenv"
+
+# --- Tools ------------------------------------------------------------------
+brew "just"
+brew "qpdf"
+brew "dagu"
+
+# --- Mail (neomutt stack) ---------------------------------------------------
+brew "neomutt"
+brew "msmtp"
+brew "abook"
+brew "urlscan"
+
+# --- Cloud / work -----------------------------------------------------------
+brew "oci-cli"
+brew "googleworkspace-cli"
+
+# --- Fonts ------------------------------------------------------------------
+# MesloLGS NF is the font used by ghostty, wezterm and powerlevel10k.
+cask "font-meslo-lg-nerd-font"
+
+# --- Applications -----------------------------------------------------------
 cask "aerospace"
-cask "arc"
-cask "docker-desktop"
-cask "font-hack-nerd-font"
-cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
-cask "google-chrome"
-cask "intellij-idea-ce"
-cask "visual-studio-code"
-cask "warp"
 cask "wezterm"
-cask "zoom"
-vscode "anthropic.claude-code"
-vscode "golang.go"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-vscode-remote.remote-containers"
+cask "zed"
+cask "fluidvoice"
