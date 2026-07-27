@@ -20,6 +20,9 @@ setopt share_history
 # NOTE: do not export TERM here -- the terminal (Ghostty/WezTerm) and tmux each
 # set it correctly. Forcing it breaks true colour, italics and undercurl.
 
+# bat -- keep it on the same Catppuccin theme as everything else
+export BAT_THEME="Catppuccin Mocha"
+
 # fzf opts
 
 export FZF_DEFAULT_OPTS='

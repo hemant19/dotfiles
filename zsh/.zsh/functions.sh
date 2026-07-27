@@ -1,5 +1,6 @@
-# TMUX auto-connect
-# Check if tmux is installed, not already in a tmux session, and the shell is interactive
+#!/bin/zsh
+
+# Attach to an existing tmux session, or start one called "main".
 function tm() {
   if command -v tmux &>/dev/null && [ -z "$TMUX" ] && [[ $- == *i* ]]; then
     # Get the list of sessions
@@ -15,32 +16,9 @@ function tm() {
   fi
 }
 
+# Pick a project under ~/workspace and switch to its tmux session.
+# The real implementation lives in the script, which is also bound to
+# `prefix + f` in .tmux.conf -- keep the logic in one place only.
 function ts() {
-  if [[ $# -eq 1 ]]; then
-    selected=$1
-  else
-    selected=$(find ~/workspace -mindepth 1 -maxdepth 1 -type d | fzf)
-  fi
-
-  if [[ -z $selected ]]; then
-    return 0
-  fi
-
-  selected_name=$(basename "$selected" | tr . _)
-  tmux_running=$(pgrep tmux)
-
-  if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    return 0
-  fi
-
-  if ! tmux has-session -t=$selected_name 2>/dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-  fi
-
-  if [[ -z $TMUX ]]; then
-    tmux attach -t $selected_name
-  else
-    tmux switch-client -t $selected_name
-  fi
+  "$HOME/.zsh/scripts/tmux-sessionizer.sh" "$@"
 }
