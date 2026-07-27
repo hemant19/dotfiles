@@ -1,4 +1,5 @@
 tap "nikitabobko/tap"
+brew "bat"
 brew "eza"
 brew "fd"
 brew "fzf"

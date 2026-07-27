@@ -17,16 +17,17 @@ setopt hist_ignore_space
 setopt share_history
 
 # ui
-export TERM=xterm-256color
+# NOTE: do not export TERM here -- the terminal (Ghostty/WezTerm) and tmux each
+# set it correctly. Forcing it breaks true colour, italics and undercurl.
 
-# fzf opts 
+# fzf opts
 
 export FZF_DEFAULT_OPTS='
 --height 40%
 --layout=reverse
 --info=inline
 --border=rounded
---preview "bat --color=always --style=number --line-range=:500 {}"
+--preview "bat --color=always --style=numbers --line-range=:500 {} 2>/dev/null || cat {}"
 --preview-window "right:50%:hidden"
 --bind "ctrl-p:toggle-preview"
 --bind "ctrl-/:change-preview-window(down:50%)"

@@ -8,7 +8,7 @@ brew bundle install
 curl -s "https://get.sdkman.io" | bash
 
 #### Install and init config
-mac_config=(nvim zsh ghostty aerospace)
+mac_config=(nvim zsh tmux wezterm ghostty aerospace)
 
 for config in $mac_config; do 
   echo "Initializing $config"
