@@ -22,4 +22,14 @@ export PATH="/Users/hemant/.antigravity/antigravity/bin:$PATH"
 [[ ! -f $HOME/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-. "$HOME/.local/bin/env"
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hemant/workspace/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hemant/workspace/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hemant/workspace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hemant/workspace/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/hemant/.local/bin:$PATH"
