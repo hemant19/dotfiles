@@ -11,3 +11,8 @@ macos-titlebar-style = hidden
 
 macos-option-as-alt = true
 keybind = shift+enter=text:\n
+
+# Claude Code rings the bell when an agent finishes or needs input. The default
+# feature set only bounces the dock, which is invisible when Ghostty is fully
+# backgrounded -- "system" adds a real macOS notification.
+bell-features = system,attention,title
