@@ -17,6 +17,7 @@ brew "eza"
 brew "fd"
 brew "fzf"
 brew "ripgrep"
+brew "sesh"        # project switcher: `ts` and tmux prefix + f (see sesh/)
 brew "tree"
 brew "zoxide"
 

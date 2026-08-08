@@ -16,9 +16,28 @@ function tm() {
   fi
 }
 
-# Pick a project under ~/workspace and switch to its tmux session.
-# The real implementation lives in the script, which is also bound to
-# `prefix + f` in .tmux.conf -- keep the logic in one place only.
+# Pick a project and switch to its tmux session, creating it if needed.
+# sesh does the work; how a session is laid out lives in ~/.config/sesh/sesh.toml
+# and nowhere else. tmux's `prefix + f` is the same thing from inside tmux.
 function ts() {
-  "$HOME/.zsh/scripts/tmux-sessionizer.sh" "$@"
+  if ! command -v sesh &>/dev/null; then
+    print -u2 "ts: sesh is not installed -- brew install sesh"
+    return 1
+  fi
+
+  # With an argument, connect straight to it. Without one, fuzzy-pick.
+  if (( $# )); then
+    sesh connect "$@"
+    return
+  fi
+
+  # Same pipeline as tmux's `prefix + f`; -d collapses the duplicate entry a
+  # configured project also gets from zoxide.
+  local picked
+  picked=$(sesh list -d --icons | fzf --ansi --no-sort \
+    --border-label=' sesh ' --prompt='⚡  ' \
+    --preview='sesh preview {2..}' \
+    --preview-window='right,55%,border-left') || return
+  [[ -n $picked ]] || return
+  sesh connect "$picked"
 }

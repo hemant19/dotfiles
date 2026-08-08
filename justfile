@@ -1,4 +1,4 @@
-packages := "nvim zsh tmux wezterm ghostty aerospace git"
+packages := "nvim zsh tmux wezterm ghostty aerospace git sesh"
 
 # List available recipes
 default:
@@ -40,6 +40,6 @@ brew-drift:
 lint:
     #!/usr/bin/env zsh
     set -e
-    for f in zsh/.zshrc zsh/.zprofile zsh/.zsh/*.sh zsh/.zsh/plugins/init.sh zsh/.zsh/scripts/*.sh install.sh; do
+    for f in zsh/.zshrc zsh/.zprofile zsh/.zsh/*.sh zsh/.zsh/plugins/init.sh zsh/.zsh/scripts/*.sh(N) install.sh; do
         zsh -n "$f" && echo "ok  $f"
     done

@@ -1,0 +1,31 @@
+# sesh -- the project switcher behind `ts` and tmux's prefix + f.
+# This file is the only place that decides how a project session is laid out.
+#
+# sesh finds projects on its own (live tmux sessions, zoxide history, and the
+# directories under ~/workspace), so a project does NOT need an entry here to be
+# switchable. Add a [[session]] block only to give one a startup command or a
+# window layout beyond the single shell you get by default.
+
+[default_session]
+# Same git-log preview the old sessionizer used, which was the good part of it.
+preview_command = "git -C {} log --oneline --color=always -12 2>/dev/null || ls -A {}"
+
+# --- Window templates -------------------------------------------------------
+# Referenced by name from a session's `windows`, and inheriting the session's
+# path. sesh already gives every session a shell as window 1, so there is no
+# `shell` template here -- listing one just produces a duplicate. There is
+# deliberately no `claude` window either: agents are dispatched from agent view
+# (tmux prefix + a), not from a window reserved for them.
+
+[[window]]
+name = "nvim"
+startup_script = "nvim"
+
+# --- Projects ---------------------------------------------------------------
+# Only the ones that want more than the default single shell.
+
+[[session]]
+name = "dotfiles"
+path = "~/workspace/dotfiles"
+windows = ["nvim"]
+preview_command = "git -C {} log --oneline --color=always -12"
