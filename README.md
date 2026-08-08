@@ -32,6 +32,7 @@ Every top-level directory is a stow package whose contents mirror `$HOME`:
 | `ghostty/`  | `~/.config/ghostty/` |
 | `wezterm/`  | `~/.wezterm.lua` |
 | `aerospace/`| `~/.config/aerospace/` |
+| `sesh/`     | `~/.config/sesh/` |
 
 ```sh
 stow -R <pkg>     # (re)link one package
@@ -50,7 +51,23 @@ deliberately **not** tracked here.
 ## Notes
 
 - zsh plugins and tpm are git submodules under `zsh/.zsh/plugins/` and
-  `tmux/.tmux/plugins/`; there is no plugin manager for zsh.
-- tmux prefix is `C-z`. `prefix + f` opens the project switcher; `prefix + I`
-  installs new tpm plugins.
+  `tmux/.tmux/plugins/`; there is no plugin manager for zsh. tmux's *other*
+  plugins are TPM-managed, so run `prefix + I` after pulling.
+- tmux prefix is `C-z`. The keys worth knowing:
+
+  | Key | Does |
+  |-----|------|
+  | `prefix + f` | project switcher (`sesh`) — live sessions, zoxide history, `~/workspace` |
+  | `prefix + a` | Claude Code agent view: every background agent and what it needs |
+  | `prefix + b` | jump to a session whose agent rang the bell |
+  | `prefix + C-t` | floating pane (floax); `prefix + M` for its menu |
+  | `prefix + g` | lazygit popup |
+  | `prefix + Tab` | grab a path/URL/hash off the screen (extrakto) |
+  | `prefix + F` | fuzzy-search the scrollback (fuzzback) |
+  | `prefix + P` | toggle the pane-border task title |
+
+- Session layout is `sesh`'s job, not tmux's: see `sesh/.config/sesh/sesh.toml`.
+  A project is switchable without being listed there; add an entry only to give
+  it a startup command or extra windows.
+- Agent supervision belongs to `claude agents`, not to the tmux config.
 - `nvim/.config/nvim/lazy-lock.json` is intentionally untracked.
