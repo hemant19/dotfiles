@@ -60,7 +60,7 @@ deliberately **not** tracked here.
   | `prefix + f` | project switcher (`sesh`) — live sessions, zoxide history, `~/workspace` |
   | `prefix + a` | Claude Code agent view: every background agent and what it needs |
   | `prefix + b` | jump to a session whose agent rang the bell |
-  | `prefix + C-t` | floating pane (floax); `prefix + M` for its menu |
+  | `prefix + C-t` | floating pane (floax); `prefix + S` for its menu |
   | `prefix + g` | lazygit popup |
   | `prefix + Tab` | grab a path/URL/hash off the screen (extrakto) |
   | `prefix + F` | fuzzy-search the scrollback (fuzzback) |
