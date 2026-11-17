@@ -1,104 +1,39 @@
 # CLAUDE.md
 
-Personal macOS dotfiles for Hemant Bhoyar, managed with GNU Stow.
+Personal dotfiles for Hemant Bhoyar across **macOS (Apple Silicon)** and **`agni` (Ubuntu 24.04 LTS ARM64)**, managed with GNU Stow.
 
 ## Layout
 
-Each top-level directory is a **stow package**. Its internal structure mirrors
-`$HOME`, so `zsh/.zshrc` is symlinked to `~/.zshrc` and
-`nvim/.config/nvim/` to `~/.config/nvim/`.
+Each top-level package mirrors `$HOME` via `.stowrc` (`--target=$HOME`):
 
-| Package     | Links to                    | Contents |
-|-------------|-----------------------------|----------|
-| `zsh/`      | `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.zsh/` | shell config, plugins (submodules), aliases, functions, scripts |
-| `nvim/`     | `~/.config/nvim/`           | LazyVim-based Neovim config |
-| `tmux/`     | `~/.tmux.conf`, `~/.tmux/`  | tmux config + TPM (submodule) |
-| `git/`      | `~/.gitconfig`, `~/.config/git/` | git config + global gitignore |
-| `ghostty/`  | `~/.config/ghostty/`        | Ghostty terminal |
-| `wezterm/`  | `~/.wezterm.lua`            | WezTerm terminal |
-| `aerospace/`| `~/.config/aerospace/`      | AeroSpace tiling WM |
-| `sesh/`     | `~/.config/sesh/`           | project switcher: session + window layouts |
+- **Shared (`macOS` + `agni`):** `zsh/`, `bat/`, `ripgrep/`, `atuin/`, `yazi/`, `mise/`, `tmux/`, `git/`
+- **macOS-only:** `ghostty/`, `aerospace/`, `herdr/`, `nvim/`
+- **Global Agent Memory:** `agent-memory.md` (symlinked by `install.sh` / `just sync-agent-memory` to `~/.gemini/GEMINI.md`, `~/.gemini/config/GEMINI.md`, `~/.claude/CLAUDE.md`, and `~/.codex/AGENTS.md`)
 
-`.stowrc` pins `--target=$HOME`, so `stow <pkg>` from the repo root is enough.
-
-## Common commands
+## Common Commands
 
 ```sh
-just              # list all recipes
-just install      # full bootstrap (submodules + brew + stow)
-just link         # (re)link every package
-just check        # dry-run the linking
-just lint         # zsh -n every shell file
-just brew-drift   # what's installed but not in the Brewfile
-
-stow -R <pkg>     # (re)link one package
-stow -D <pkg>     # unlink one package
-stow -n -v <pkg>  # dry run -- always do this before restowing
+just                   # list all recipes
+just install           # full OS-aware bootstrap
+just check             # dry-run stow for current OS
+just link              # (re)link all packages for current OS
+just lint              # zsh -n syntax check on every shell file
+just sync-tools        # brew bundle install (macOS) or mise install (Linux)
+just sync-agent-memory # link agent-memory.md into ~/.gemini, ~/.claude, ~/.codex
+just brew-drift        # non-destructive preview of undeclared Homebrew packages
 ```
 
-## Conventions
+## Conventions & Design Decisions
 
-- **Never edit files under `~` directly** — they're symlinks into this repo.
-  Edit here; changes are live immediately.
-- Shell config is split by concern under `zsh/.zsh/`: `aliases.sh`,
-  `options.sh`, `functions.sh`, `plugins/init.sh`. `.zshrc` only sources them.
-  Add new shell code to the right file, not to `.zshrc`.
-- `.zprofile` = login-shell env (PATH, brew shellenv). `.zshrc` = interactive
-  shell (prompt, plugins, aliases).
-- **Machine-specific config goes in `~/.zshrc.local`**, which `.zshrc` sources
-  last and which is not tracked. Never commit host paths or credentials to the
-  repo — installers that append to `.zshrc` should be moved out to `.local`.
-- Theme across the whole setup is **Catppuccin Mocha**; font is
-  **MesloLGS NF**. Keep new configs consistent with both — that includes
-  `BAT_THEME`, the fzf colour flags, delta's `syntax-theme`, and the tmux and
-  Neovim themes.
-- zsh plugins are git submodules under `zsh/.zsh/plugins/`, loaded explicitly
-  by `plugins/init.sh` — no plugin manager. Adding one means
-  `git submodule add` + a `source` line there.
-  **zsh-syntax-highlighting must stay last** in that file.
-- Neovim is LazyVim; custom plugin specs go in
-  `nvim/.config/nvim/lua/plugins/*.lua`, one file per concern. LazyVim extras
-  are toggled in `lazyvim.json`.
-- tmux prefix is `C-z` (not `C-b`). tmux plugins are TPM-managed; new plugins
-  need `prefix + I` to install. Unlike the zsh plugins these are **not**
-  submodules — `tmux/.tmux/plugins/*` is gitignored except `tpm`
-  (`.gitignore:2`), so adding one is a `@plugin` line and nothing else.
-- **tmux does not track what agents are doing.** `claude agents` (tmux
-  `prefix + a`) owns backgrounded agents: their state, what each is working on,
-  and replying to blocked ones. tmux only handles panes that are *attached* —
-  the bell-to-window-alert wiring and `prefix + b`. Don't rebuild agent
-  supervision in the tmux config; it was tried and removed.
-- Paths inside configs must be `~`-relative, never `/Users/hemant/...`, so the
-  repo works from any checkout location.
-- The `Brewfile` is curated by hand and should mirror what's actually
-  installed. `brew bundle check` should stay clean.
-
-## Gotchas
-
-- `nvim/.config/nvim/lazy-lock.json` is **deliberately untracked and ignored**
-  (`.gitignore:5`). Don't re-add it. The file still exists on disk and Neovim
-  uses it; it just isn't versioned.
-- `install.sh` deliberately does **not** use `stow --adopt` — that pulls files
-  from `$HOME` into the repo and silently overwrites committed config. On a
-  stow conflict, inspect and remove the offending file in `$HOME` by hand.
-- The project switcher is `sesh`, configured in `sesh/.config/sesh/sesh.toml`,
-  and that file is the **only** place session layout is decided. The `ts` shell
-  function and the tmux `prefix + f` binding are both thin wrappers over
-  `sesh connect`. Don't reintroduce a shell script for this — there used to be
-  one (`zsh/.zsh/scripts/tmux-sessionizer.sh`) and it grew a hardcoded window
-  layout that applied to every project. A project needs no entry in `sesh.toml`
-  to be switchable; add one only for a startup command or extra windows.
-- `run-shell` in tmux expands `#{...}` **before** handing the string to the
-  shell, so a per-session format inside a `run-shell` body must be written
-  `##{...}`. Unescaped, it collapses to the current pane's value — see the
-  `prefix + b` binding, which was silently broken this way.
-- Continuum's auto-restore is deliberately off (only `@resurrect-*` options are
-  set). Claude Code's supervisor already persists background agents, so
-  restoring a window snapshot on every tmux start piles stale windows on top of
-  live ones. `prefix + C-s` / `prefix + C-r` still work by hand.
-- Do not `export TERM` in shell config — the terminal and tmux set it, and
-  overriding breaks true colour, italics and undercurl.
-- Shell functions must use `return`, never `exit` — `exit` in a sourced
-  function kills the user's interactive shell.
-- Globbing does not happen inside `[[ ]]`. The compinit cache check in
-  `.zshrc` uses an array assignment for exactly this reason.
+- **Never edit files under `~` directly** and **never use `stow --adopt`**.
+- **Theme & Font:** **Catppuccin Mocha** + **MesloLGS NF** everywhere (`bat`, `ripgrep`, `vivid` `LS_COLORS`, `fzf`, `fzf-tab`, `fast-syntax-highlighting`, `atuin`, `yazi`, `git-delta`, `tmux`, `ghostty`), with **Powerlevel10k** (`~/.p10k.zsh`) for the Zsh prompt.
+- **AI-Friendly & Cross-OS GNU Parity (`zsh/.zshenv`):**
+  - `.zshenv` runs on *every* Zsh invocation (including non-interactive `zsh -c` from Claude Code, Antigravity, and Codex).
+  - On macOS, `.zshenv` prepends Homebrew `gnubin` directories (`gnu-sed`, `coreutils`, `grep`, `findutils`, `gawk`) so GNU flags like `sed -i 's/a/b/'`, `grep -P`, `timeout`, `realpath`, and `stat -c` behave identically on macOS and Linux (`agni`).
+  - Non-interactive / non-TTY shells automatically set `PAGER=cat`, `GIT_PAGER=cat`, and `BAT_PAGER=""` so agents never hang on pagers.
+  - Global `ripgrep/config` and `bat/config` keep `--color=auto` and omit `--hyperlink-format` so piped/captured output stays clean plain text; interactive human shortcuts (`cat='bat --paging=never'`, `rgh`, `eza --color=auto --icons=auto`) live in interactive-only `zsh/.zshrc`.
+- **Prompt (`powerlevel10k`):** Uses the `zsh/.zsh/plugins/powerlevel10k` submodule + `zsh/.p10k.zsh` with instant prompt enabled in `zsh/.zshrc`. Displays `user@host` over SSH while staying minimal locally.
+- **Project Switcher (`ts` & tmux `prefix + f`):** Uses a native `tmux` + `zoxide` + `fzf` function in `zsh/.zshrc` (no `sesh` dependency).
+- **Linux ARM64 Binary Management (`mise/`):** On `agni` (`aarch64` Ubuntu 24.04), `apt` provides `zsh`, `stow`, `tmux`, and `git`, while `mise` (`mise/.config/mise/config.toml`) installs precompiled ARM64 releases of `fzf`, `eza`, `bat`, `fd`, `ripgrep`, `zoxide`, `delta`, `jq`, `yq`, `sd`, `ast-grep`, `difftastic`, `vivid`, `yazi`, `atuin`, `lazygit`, `just`, `gh`, `tokei`, `hyperfine`, `shellcheck`, and `shfmt`.
+- **Agent Supervision in tmux:** `claude agents` (`prefix + a`) owns background agents; tmux only surfaces bells for attached panes (`monitor-bell on` + `prefix + b`). Remember to escape per-session formats as `##{...}` and shell vars as `\$var` inside double-quoted `run-shell` commands.
+- **Ghostty <-> `agni` Terminfo:** Ghostty enables `shell-integration-features = ssh-terminfo,ssh-env`, and `xterm-ghostty` terminfo is compiled into `~/.terminfo` on `agni` so `tailscale ssh` / `rex` sessions also get full truecolor and keybindings. Never `export TERM` in Zsh files.

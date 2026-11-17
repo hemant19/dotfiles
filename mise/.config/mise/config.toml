@@ -1,0 +1,27 @@
+# Cross-platform CLI binaries (used on Linux / agni ARM64 and portable setups;
+# macOS uses Homebrew via Brewfile, or can optionally use mise too).
+[settings]
+experimental = true
+
+[tools]
+fzf = "latest"
+eza = "latest"
+bat = "latest"
+fd = "latest"
+ripgrep = "latest"
+zoxide = "latest"
+delta = "latest"
+jq = "latest"
+yq = "latest"
+sd = "latest"
+ast-grep = "latest"
+difftastic = "latest"
+vivid = "latest"
+yazi = "latest"
+atuin = "latest"
+lazygit = "latest"
+just = "latest"
+gh = "latest"
+hyperfine = "latest"
+shellcheck = "latest"
+shfmt = "latest"

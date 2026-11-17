@@ -1,9 +1,17 @@
-# Login shell environment. Interactive-only config belongs in .zshrc.
+# Login shell environment.
+# Core PATH (including Homebrew, mise shims, ~/.local/bin, and macOS GNU userland)
+# is already configured in ~/.zshenv so non-login shells and AI agents share it.
 
-# Keep PATH free of duplicates no matter how many installers prepend to it.
 typeset -U path PATH
 
-# Homebrew (Apple Silicon path; falls back silently on machines without it)
-[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ "$OSTYPE" == darwin* && -x /opt/homebrew/bin/brew ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fi
 
-# Machine-specific PATH entries live in ~/.zshrc.local, not in this repo.
+# Machine-specific login overrides live in ~/.zprofile.local (untracked).
+if [[ -f "$HOME/.zprofile.local" ]]; then
+  source "$HOME/.zprofile.local"
+fi

@@ -1,10 +1,8 @@
 # dotfiles
 
-Personal macOS setup for Hemant Bhoyar (hybhoyar@gmail.com), managed with
-[GNU Stow](https://www.gnu.org/software/stow/).
+Personal setup for Hemant Bhoyar (`hybhoyar@gmail.com`) across **macOS** and **Linux (`agni` ARM64)**, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-Neovim (LazyVim) · zsh (powerlevel10k) · tmux · Ghostty · WezTerm · AeroSpace —
-themed with Catppuccin Mocha throughout, MesloLGS NF everywhere.
+Powerlevel10k · Zsh (`fzf-tab`, `fast-syntax-highlighting`, Atuin, Yazi, Zoxide) · Ripgrep / Bat / Eza / Vivid / JQ / YQ · tmux · Ghostty · Herdr · AeroSpace — themed in **Catppuccin Mocha** with **MesloLGS NF** throughout.
 
 ## Install
 
@@ -14,60 +12,22 @@ cd ~/workspace/dotfiles
 ./install.sh
 ```
 
-`install.sh` syncs submodules, installs everything in the `Brewfile`, installs
-sdkman, then stows every package. Re-running it is safe.
+`install.sh` detects the OS automatically:
+- **macOS:** syncs submodules, installs `Brewfile` packages (including GNU userland tools), stows all packages, builds the `bat` theme cache, and links global AI agent memory.
+- **Linux (`agni`):** syncs submodules, installs `zsh`/`stow`/`tmux`/`git` via `apt`, stows shared CLI packages, installs precompiled ARM64 CLI tools via `mise`, builds the `bat` cache, and links global AI agent memory.
 
-If you already have `just` installed, `just --list` shows the shortcuts.
+Run `just --list` for everyday tasks (`just check`, `just link`, `just lint`, `just sync-tools`).
 
-## Layout
+## Highlights
 
-Every top-level directory is a stow package whose contents mirror `$HOME`:
-
-| Package     | Links to |
-|-------------|----------|
-| `zsh/`      | `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.zsh/` |
-| `nvim/`     | `~/.config/nvim/` |
-| `tmux/`     | `~/.tmux.conf`, `~/.tmux/` |
-| `git/`      | `~/.gitconfig`, `~/.config/git/` |
-| `ghostty/`  | `~/.config/ghostty/` |
-| `wezterm/`  | `~/.wezterm.lua` |
-| `aerospace/`| `~/.config/aerospace/` |
-| `sesh/`     | `~/.config/sesh/` |
-
-```sh
-stow -R <pkg>     # (re)link one package
-stow -D <pkg>     # unlink one package
-stow -n -v <pkg>  # dry run -- do this before restowing
-```
-
-`.stowrc` pins `--target=$HOME`, so plain `stow <pkg>` from the repo root works.
-
-## Machine-specific config
-
-Anything host-specific (work paths, credentials, per-machine `PATH` entries)
-goes in `~/.zshrc.local`, which `.zshrc` sources at the end and which is
-deliberately **not** tracked here.
-
-## Notes
-
-- zsh plugins and tpm are git submodules under `zsh/.zsh/plugins/` and
-  `tmux/.tmux/plugins/`; there is no plugin manager for zsh. tmux's *other*
-  plugins are TPM-managed, so run `prefix + I` after pulling.
-- tmux prefix is `C-z`. The keys worth knowing:
-
-  | Key | Does |
-  |-----|------|
-  | `prefix + f` | project switcher (`sesh`) — live sessions, zoxide history, `~/workspace` |
-  | `prefix + a` | Claude Code agent view: every background agent and what it needs |
-  | `prefix + b` | jump to a session whose agent rang the bell |
-  | `prefix + C-t` | floating pane (floax); `prefix + S` for its menu |
-  | `prefix + g` | lazygit popup |
-  | `prefix + Tab` | grab a path/URL/hash off the screen (extrakto) |
-  | `prefix + F` | fuzzy-search the scrollback (fuzzback) |
-  | `prefix + P` | toggle the pane-border task title |
-
-- Session layout is `sesh`'s job, not tmux's: see `sesh/.config/sesh/sesh.toml`.
-  A project is switchable without being listed there; add an entry only to give
-  it a startup command or extra windows.
-- Agent supervision belongs to `claude agents`, not to the tmux config.
-- `nvim/.config/nvim/lazy-lock.json` is intentionally untracked.
+- **Cross-Host Prompt (`powerlevel10k`):** Lean 1-line prompt with instant prompt (`~/.p10k.zsh`), displaying `user@host` automatically over SSH.
+- **Interactive Shell Ergonomics:**
+  - `<Tab>` — `fzf-tab` completion popups with live `eza` tree & `bat` file previews
+  - `Ctrl-R` — Atuin local SQLite history (with exit codes, duration, and directory filtering)
+  - `Ctrl-T` / `Alt-C` — `fd`-backed `fzf` file & directory pickers
+  - `y` — Yazi terminal file manager (`cd`s to chosen directory on quit)
+  - `cd` / `cdi` (and `z` / `zi`) — zoxide-backed smart directory jumping
+  - `cat` — `bat --paging=never` with Catppuccin Mocha syntax highlighting (raw output when piped)
+  - `ts` / tmux `C-z f` — project & tmux session switcher (`tmux` + `zoxide` + `fzf`)
+- **AI-Ready CLI Parity:** `~/.zshenv` exposes `rg`, `fd`, `jq`, `yq`, `ast-grep` (`sg`), `sd`, `difft`, `gh`, and GNU `sed`/`awk`/`grep`/`find`/`coreutils` uniformly on both macOS and Linux, while keeping piped/non-TTY output clean and unpaged.
+- **Machine-Specific Config:** Place host-only tweaks or secrets in `~/.zshrc.local` or `~/.zshenv.local` (untracked).

@@ -1,5 +1,5 @@
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# Stowed to ~/.config/aerospace/aerospace.toml via GNU Stow.
+# See: https://nikitabobko.github.io/AeroSpace/guide
 
 # Config version for compatibility and deprecations
 # See: https://nikitabobko.github.io/AeroSpace/guide#config-version
@@ -78,9 +78,9 @@ gaps.outer.right =      0
 
 
 [workspace-to-monitor-force-assignment]
-4 = ['^LG ULTRAFINE$', 'main']
-5 = ['^LG ULTRAFINE$', 'main']
-6 = ['^LG ULTRAFINE$', 'main']
+4 = ['^LF32TU87', 'main']
+5 = ['^LF32TU87', 'main']
+6 = ['^LF32TU87', 'main']
 7 = ['^Built-in Retina Display$', 'main']
 8 = ['^Built-in Retina Display$', 'main']
 9 = ['^Built-in Retina Display$', 'main']
@@ -181,6 +181,6 @@ gaps.outer.right =      0
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
-    [[on-window-detected]]
-    if.app-id = 'com.bitgapp.eqmac' # Replace with your app's bundle ID
-    run = 'layout floating'
+[[on-window-detected]]
+if.app-id = 'com.bitgapp.eqmac' # Replace with your app's bundle ID
+run = 'layout floating'

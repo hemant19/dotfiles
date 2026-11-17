@@ -73,6 +73,7 @@
 	lga = log --oneline --graph --decorate --all -30
 	d = diff
 	ds = diff --staged
+	dft = -c diff.external=difft diff
 	wip = commit -am "wip" --no-verify
 	undo = reset --soft HEAD~1
 	pushf = push --force-with-lease

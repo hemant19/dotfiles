@@ -1,0 +1,11 @@
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[ui]
+agent_panel_sort = "spaces"
+
+[experimental]
+pane_history = true
+switch_ascii_input_source_in_prefix = true

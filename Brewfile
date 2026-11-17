@@ -1,56 +1,76 @@
 # Regenerate a raw snapshot with:  brew bundle dump --force
-# Keep this file curated -- it is the source of truth for a fresh machine.
+# Keep this file curated -- it is the source of truth for macOS.
+# (Linux hosts like `agni` install portable CLI binaries via `mise/.config/mise/config.toml`.)
 
 tap "nikitabobko/tap"
 
-# --- Core CLI ---------------------------------------------------------------
+# --- Core CLI & Shell -------------------------------------------------------
+brew "atuin"        # SQLite Ctrl-R shell history
+brew "bat"          # syntax-highlighted cat, manpages, and fzf previews
+brew "eza"          # modern ls with icons & git status
+brew "fd"           # fast file finder backing fzf
+brew "fzf"          # fuzzy finder
 brew "git"
-brew "git-delta"   # pager configured in git/.gitconfig
+brew "git-delta"    # default git diff pager
+brew "difftastic"   # structural AST git diff (`git dft`)
 brew "lazygit"
 brew "neovim"
+brew "ripgrep"      # fast grep (`rg`)
 brew "stow"
 brew "tmux"
-
-# --- Shell / navigation -----------------------------------------------------
-brew "bat"         # used by the fzf preview window (see zsh/.zsh/options.sh)
-brew "eza"
-brew "fd"
-brew "fzf"
-brew "ripgrep"
-brew "sesh"        # project switcher: `ts` and tmux prefix + f (see sesh/)
 brew "tree"
-brew "zoxide"
+brew "vivid"        # Catppuccin Mocha LS_COLORS generator
+brew "yazi"         # terminal file manager (`y`)
+brew "zoxide"       # smart directory jumper (`z`)
 
-# --- Languages / runtimes ---------------------------------------------------
+# --- AI & Data / Search / Text Processing (GNU parity with Linux) -----------
+brew "ast-grep"     # structural AST search & rewrite (`sg`)
+brew "coreutils"    # GNU coreutils (`gnubin` prepended in .zshenv)
+brew "curl"
+brew "findutils"    # GNU find & xargs (`gnubin` prepended in .zshenv)
+brew "gawk"         # GNU awk (`gnubin` prepended in .zshenv)
+brew "gh"           # GitHub CLI
+brew "gnu-sed"      # GNU sed (`gnubin` prepended in .zshenv so `sed -i` matches Linux)
+brew "grep"         # GNU grep (`gnubin` prepended in .zshenv)
+brew "hyperfine"    # CLI benchmarking
+brew "jq"           # JSON processor
+brew "just"         # command runner
+brew "sd"           # ergonomic regex/literal find & replace
+brew "shellcheck"   # shell script static analysis
+brew "shfmt"        # shell formatter
+brew "tokei"        # fast codebase LOC stats
+brew "wget"
+brew "yq"           # YAML / JSON / TOML / XML / CSV processor
+
+# --- Languages / Runtimes ---------------------------------------------------
+brew "luarocks"
 brew "node"
-brew "pnpm"
-brew "luarocks"        # neovim plugin builds
-brew "tree-sitter-cli" # neovim treesitter
 brew "pipx"
-brew "virtualenv"
+brew "pnpm"
+brew "tree-sitter-cli"
 
-# --- Tools ------------------------------------------------------------------
-brew "just"
-brew "qpdf"
+# --- Tools & Networking -----------------------------------------------------
 brew "dagu"
+brew "herdr"
+brew "mole"
+brew "qpdf"
+brew "tailscale"
 
 # --- Mail (neomutt stack) ---------------------------------------------------
-brew "neomutt"
-brew "msmtp"
 brew "abook"
+brew "msmtp"
+brew "neomutt"
 brew "urlscan"
 
-# --- Cloud / work -----------------------------------------------------------
-brew "oci-cli"
+# --- Cloud / Work -----------------------------------------------------------
 brew "googleworkspace-cli"
+brew "oci-cli"
 
 # --- Fonts ------------------------------------------------------------------
-# MesloLGS NF is the font used by ghostty, wezterm and powerlevel10k.
+# MesloLGS NF is used across Ghostty, Powerlevel10k, tmux, eza, and yazi.
 cask "font-meslo-lg-nerd-font"
 
 # --- Applications -----------------------------------------------------------
 cask "aerospace"
 cask "ghostty"
-cask "wezterm"
 cask "zed"
-cask "fluidvoice"

@@ -1,0 +1,6 @@
+# Catppuccin Mocha syntax highlighting; auto color/paging keeps pipes & AI captures clean.
+--theme="Catppuccin Mocha"
+--style="numbers,changes,header-filename"
+--italic-text=always
+--color=auto
+--paging=auto

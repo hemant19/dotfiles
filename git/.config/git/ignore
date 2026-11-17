@@ -21,3 +21,5 @@
 .env
 .env.local
 .direnv/
+
+**/.claude/.cc-writes/

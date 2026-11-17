@@ -16,13 +16,14 @@ return {
       },
     },
     opts = {
+      flavour = "mocha",
       integrations = { blink_cmp = true },
     },
-    {
-      "LazyVim/LazyVim",
-      opts = {
-        colorscheme = "catppuccin",
-      },
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin-mocha",
     },
   },
 }

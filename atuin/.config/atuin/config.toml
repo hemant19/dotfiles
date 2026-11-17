@@ -1,0 +1,16 @@
+# Local-only Atuin history (no cloud sync / account prompt)
+auto_sync = false
+update_check = false
+
+search_mode = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "directory"
+style = "compact"
+inline_height = 20
+show_preview = true
+show_help = true
+enter_accept = true
+workspaces = true
+
+[theme]
+name = "catppuccin-mocha"

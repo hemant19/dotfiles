@@ -1,0 +1,14 @@
+# AI-safe ripgrep config:
+# Do NOT add --color=always, --hyperlink-format, or --heading here;
+# ripgrep defaults to --color=auto so interactive TTYs get Catppuccin Mocha
+# colors while piped/scripted/AI invocations receive raw file:line:text.
+
+--smart-case
+
+# Catppuccin Mocha RGB palette (applied only when outputting to a TTY)
+--colors=path:fg:203,166,247
+--colors=path:style:bold
+--colors=line:fg:166,227,161
+--colors=column:fg:148,226,213
+--colors=match:fg:243,139,168
+--colors=match:style:bold
